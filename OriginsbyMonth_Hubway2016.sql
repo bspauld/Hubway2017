@@ -11,9 +11,8 @@
 drop table public.originsbymonth_2016;
 create table public.originsbymonth_2016
 (
-	MonthTEXT varchar(25),
-	DayTEXT varchar(25),
 	DayofYear int,
+	DateVal date,
 	Station varchar(255),
 	TotalStarts int,
 	StartCat int
@@ -23,11 +22,9 @@ create table public.originsbymonth_2016
 --Add start station Geometry Column
 SELECT AddGeometryColumn ('public','originsbymonth_2016','geom',4326,'MULTIPOINT',2);
 
-
 insert into public.originsbymonth_2016
-select  to_char(cast(a.starttime as date), 'MONTH') as MonthTEXT,
-	to_char(cast(a.starttime as date), 'DAY') as DayTEXT,
-	extract(doy from a.starttime) as DayofYear,
+select  extract(doy from a.starttime) as DayofYear,
+	cast(a.starttime as date) as DateVal,
 	s.Station,
 	count(*) as TotalStarts,
 	case 
@@ -43,11 +40,9 @@ select  to_char(cast(a.starttime as date), 'MONTH') as MonthTEXT,
 	end as StartCat,
 	ST_Collect(s.geom) as geom
 from public.hubway_alltips_2016 a
-	inner join public.hubway_stations s on a.es_name = s.station
-group by to_char(cast(a.starttime as date), 'MONTH'),
-	 to_char(cast(a.starttime as date), 'DAY'),
+	inner join public.hubway_stations s on a.ss_name = s.station
+group by cast(a.starttime as date),
 	 extract(doy from a.starttime),
-	 s.station
-	 
+	 s.station	 
 order by extract(doy from a.starttime), 
 	 s.Station;
