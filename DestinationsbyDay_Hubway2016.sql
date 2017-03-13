@@ -8,8 +8,8 @@
 
 */
 
-drop table public.destinationsbymonth_2016;
-create table public.destinationsbymonth_2016
+drop table public.destinationsbyday_2016;
+create table public.destinationsbyday_2016
 (
 	DayofYear int,
 	DateVal date,
@@ -19,9 +19,9 @@ create table public.destinationsbymonth_2016
 );
 
 --Add start station Geometry Column
-SELECT AddGeometryColumn ('public','destinationsbymonth_2016','geom',4326,'MULTIPOINT',2);
+SELECT AddGeometryColumn ('public','destinationsbyday_2016','geom',4326,'MULTIPOINT',2);
 
-insert into public.destinationsbymonth_2016
+insert into public.destinationsbyday_2016
 select  extract(doy from a.stoptime) as DayofYear,
 	cast(a.stoptime as date) as DateVal,
 	s.Station,
