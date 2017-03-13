@@ -1,5 +1,5 @@
 /*
-	Script:  DestinationsbyMonth_Hubway2016.sql
+	Script:  DestinationsbyDay_Hubway2016.sql
 	Purpose: Script to generate table that stores the destinations by day for each hubway station
 		 for 2016
 	
