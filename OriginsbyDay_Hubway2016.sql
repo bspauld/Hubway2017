@@ -1,5 +1,5 @@
 /*
-	Script:  OriginsbyMonth_Hubway2016.sql
+	Script:  OriginsbyDay_Hubway2016.sql
 	Purpose: Script to generate table that stores the origins by day for each hubway station
 		 for 2016
 	
@@ -8,8 +8,8 @@
 
 */
 
-drop table public.originsbymonth_2016;
-create table public.originsbymonth_2016
+drop table public.originsbyday_2016;
+create table public.originsbyday_2016
 (
 	DayofYear int,
 	DateVal date,
@@ -20,9 +20,9 @@ create table public.originsbymonth_2016
 
 
 --Add start station Geometry Column
-SELECT AddGeometryColumn ('public','originsbymonth_2016','geom',4326,'MULTIPOINT',2);
+SELECT AddGeometryColumn ('public','originsbyday_2016','geom',4326,'MULTIPOINT',2);
 
-insert into public.originsbymonth_2016
+insert into public.originsbyday_2016
 select  extract(doy from a.starttime) as DayofYear,
 	cast(a.starttime as date) as DateVal,
 	s.Station,
