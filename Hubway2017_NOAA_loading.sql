@@ -226,4 +226,4 @@ create table public.NOAA_BostonDailyWeather_2016
 );
 
 Copy public.NOAA_BostonDailyWeather_2016
-from 'C:\Work\Projects\Hubway2017\OrgData\NOAAWeather\BostonDailyNOAAWeather.csv' DELIMITER ',' CSV Header;
+from 'PATHTOFILE\BostonDailyNOAAWeather.csv' DELIMITER ',' CSV Header;
